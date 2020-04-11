@@ -16,6 +16,7 @@ def do_pack():
     try:
         local("mkdir -p ./versions")
         local("tar -cvzf {:s} web_static".format(file_backup))
+        return file_backup
     except:
         return None
 
