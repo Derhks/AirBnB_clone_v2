@@ -23,20 +23,24 @@ def do_pack():
 def do_deploy(archive_path):
     """This method deploy the new file of the web_static"""
     if os.path.isfile(archive_path):
-        remote_path = "/tmp/{:s}".format(archive_path[9:])
-        path = "web_static/releases"
-        put(archive_path, remote_path)
-        run("mkdir -p /data/web_static/releases/{:s}".
-            format(archive_path[9:-4]))
-        run("tar -xzf /tmp/{:s} -C /data/web_static/releases/{:s}".
-            format(archive_path[9:], archive_path[9:-4]))
-        run("rm /tmp/{:s}".format(archive_path[9:]))
-        run("mv /data/{:s}/{:s}/web_static/* /data/web_static/releases/{:s}"
-            .format(path, archive_path[9:-4], archive_path[9:-4]))
-        run("rm -rf /data/web_static/releases/{:s}/web_static".
-            format(archive_path[9:-4]))
-        run("rm -rf /data/web_static/current")
-        run("ln -s /data/web_static/releases/{:s}/ /data/web_static/current".
-            format(archive_path[9:-4]))
+        try:
+            remote_path = "/tmp/{:s}".format(archive_path[9:])
+            path = "web_static/releases"
+            put(archive_path, remote_path)
+            run("mkdir -p /data/web_static/releases/{:s}".
+                format(archive_path[9:-4]))
+            run("tar -xzf /tmp/{:s} -C /data/web_static/releases/{:s}".
+                format(archive_path[9:], archive_path[9:-4]))
+            run("rm /tmp/{:s}".format(archive_path[9:]))
+            run("mv /data/{:s}/{:s}/web_static/* /data/{:s}/{:s}"
+                .format(path, archive_path[9:-4], path, archive_path[9:-4]))
+            run("rm -rf /data/web_static/releases/{:s}/web_static".
+                format(archive_path[9:-4]))
+            run("rm -rf /data/web_static/current")
+            run("ln -s /data/{:s}/{:s}/ /data/web_static/current".
+                format(path, archive_path[9:-4]))
+            return True
+        except:
+            return False
     else:
         return False
