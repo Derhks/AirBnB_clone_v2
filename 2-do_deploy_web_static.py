@@ -10,6 +10,7 @@ env.password = argv[5]
 
 
 def do_pack():
+    """This method create a backup for the directory web_static"""
     time = datetime.now().strftime("%Y%m%d%H%M%S")
     file_backup = "versions/web_static_{:s}.tgz".format(time)
     try:
@@ -20,6 +21,7 @@ def do_pack():
 
 
 def do_deploy(archive_path):
+    """This method deploy the new file of the web_static"""
     if os.path.isfile(archive_path):
         remote_path = "/tmp/{:s}".format(archive_path[9:])
         path = "web_static/releases"
