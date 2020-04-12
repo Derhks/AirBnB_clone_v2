@@ -59,10 +59,9 @@ def deploy():
 def do_clean(number=0):
     """This method keep it clean the folders"""
     path = "/data/web_static/releases/"
-    numb = int(number)
-    if numb <= 1:
-        local("ls -d -1tr versions/* | head -n -{:d} | xargs -d '\n' rm -rf".format(numb))
-        sudo("ls -d -1tr {:s}* | head -n -{:d} | xargs -d '\n' rm -rf".format(path, numb))
-    if numb == 2:
-        local("ls -d -1tr versions/* | head -n -{:d} | xargs -d '\n' rm -rf".format(numb))
-        sudo("ls -d -1tr {:s}* | head -n -{:d} | xargs -d '\n' rm -rf".format(path, numb))
+    if number <= str(1):
+        local("ls -d -1tr versions/* | head -n -1 | xargs -d '\n' rm -rf")
+        sudo("ls -d -1tr {:s}* | head -n -1 | xargs -d '\n' rm -rf".format(path))
+    if number == str(2):
+        local("ls -d -1tr versions/* | head -n -2 | xargs -d '\n' rm -rf")
+        sudo("ls -d -1tr {:s}* | head -n -2 | xargs -d '\n' rm -rf".format(path))
