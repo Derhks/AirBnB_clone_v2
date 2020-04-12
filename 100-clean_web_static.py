@@ -59,8 +59,8 @@ def deploy():
 def do_clean(number=0):
     path = "data/web_static/releases/"
     if number <= str(1):
-        local("ls -d -1tr versions/* | head -n -1 | xargs -d '\n' rm -f")
-        run("ls -d -1tr {:s}* | head -n -1 | xargs -d '\n' rm -f".format(path))
+        local("ls -d -1tr versions/* | head -n -{:s} | xargs -d '\n' rm -f".format(number))
+        run("ls -d -1tr {:s}* | head -n -{:s} | xargs -d '\n' rm -f".format(path, number))
     if number == str(2):
-        local("ls -d -1tr versions/* | head -n -2 | xargs -d '\n' rm -f")
-        run("ls -d -1tr {:s}* | head -n -2 | xargs -d '\n' rm -f".format(path))
+        local("ls -d -1tr versions/* | head -n -{:s} | xargs -d '\n' rm -f".format(number))
+        run("ls -d -1tr {:s}* | head -n -{:s} | xargs -d '\n' rm -f".format(path, number))
