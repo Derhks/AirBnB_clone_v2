@@ -57,6 +57,7 @@ def deploy():
 
 
 def do_clean(number=0):
+    """This method keep it clean the folders"""
     path = "data/web_static/releases/"
     if number <= str(1):
         local("ls -d -1tr versions/* | head -n -1 | xargs -d '\n' rm -f")
