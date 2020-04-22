@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from models.city import City
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+import models
 
 
 class State(BaseModel, Base):
@@ -17,7 +18,7 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        """ Return the list of the city with the same if os self.id"""
+        """ Return the list of the cities with the same id as self.id"""
         states = []
         cities_list = models.storage.all(City)
         for city in cities_list.values():
